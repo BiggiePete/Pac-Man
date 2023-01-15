@@ -1,6 +1,33 @@
-version: "0.1"
+version: "3"
+
+volumes:
+  pacman-data:
+  pacman-mysql:
+
+
 services:
-  web:
+  mysql:
+    image: mysql:8.0
+    volumes:
+      - pacman-mysql:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: secret
+      MYSQL_DATABASE: robotics_inv
+    ports:
+      - 3306:3306
+    networks:
+      - default
+
+  pacman:
     build: .
     ports:
       - "8000:8000"
+    volumes:
+      - pacman-data:/pac
+    networks:
+      - default
+    tty: true
+
+networks:
+  default:
+    driver: bridge

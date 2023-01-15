@@ -29,14 +29,14 @@ SECRET_KEY = 'replace-me'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["127.0.0.1","localhost","your_domain_here"]
+ALLOWED_HOSTS = ["http://localhost","http://127.0.0.1"]
 
 
 # Application definition
 
 
 INSTALLED_APPS = [
-    'corsheaders'
+    'corsheaders',
     'inventory.apps.InventoryConfig',
     'django.contrib.admin',
     'django.contrib.auth',
