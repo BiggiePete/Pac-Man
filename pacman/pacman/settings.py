@@ -29,8 +29,11 @@ SECRET_KEY = 'replace-me'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["http://localhost","http://127.0.0.1"]
-
+ALLOWED_HOSTS = ["localhost","127.0.0.1"]
+CSRF_TRUSTED_ORIGINS = [
+    "http://localhost",
+    "http://127.0.0.1",
+]
 
 # Application definition
 
@@ -94,7 +97,6 @@ DATABASES = {
 }
 
 CORS_ALLOW_ALL_ORIGINS = True
-CSRF_TRUSTED_ORIGINS = ALLOWED_HOSTS
 
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators

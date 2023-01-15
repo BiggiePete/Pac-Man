@@ -1,77 +1,41 @@
 # Pac-Man
 
-Pac-Man is a straightforward and easy to use Django handled search / inventory system.
-
-## Running the Server
-
-python ./manage.py runserver
-
-### Oh NO! ive run into errors
-
-run
+Pac-Man is a straightforward and easy to use Django handled search / inventory system. That leverages Docker to handle mico-service architecture
 
 ## Installation
 
 reqs
-    docker-desktop
-    vs-code-docker-extention
 
-
+    (full gui install) docker-desktop
+    (lightweight install) docker-cli docker-compose docker
 
 ### Step by Step
 
-if you want a different password for the database, change it in the etc/mysql dir
+Before you bring anything up, the following needs to be done :
+(x) - Edit /pacman/settings.py
+    Change the ALLOWED_HOSTS, to include the domain name EX : example.com
+    Change the CSRF_TRUSTED_ORIGINS, to include domain name !MAKE SURE TO HAVE http and https versions added! EX : <http://example.com> & <https://example.com>
 
-since the project now uses docker to handle the DBs, here is what needs to be done :
+Bringing up the docker containers is a straightforward and thankfull very hands-off process
+start by :
 
-install docker desktop,
-pull the mysql container from docker's source
-run the mysql container, with the following options : 
+    cd /Pac-Man/
 
-    name = mysqldb
-    port 3306::3306
-        33060::unbound
-    OPTIONAL_ENV_VAR:
-        MYSQL_ROOT_PASSWORD = [whatever password you want, just remember it]
-in vs-code, create a dev container using the pacman project
-once both docker containers have stabilized, and are running (5-10min)
+From here, all you need to do is :
 
-IN THE MYSQL DOCKER CONTAINER
+    docker compose up -d
 
-run the following commands : 
+If you cannot connect to localhost:8000 right away, dont worry about it, the docker database may take >5min to bring up, especially on a hard-drive. If you want to watch the startup live, run :
 
-    mysql -u root -p #use the password created earlier
-    #once in mysql run the following
-    CREATE USER 'roboticsuser'@'%' IDENTIFIED BY 'pwd';
-    CREATE DATABASE robotics_inv;
-    GRANT ALL PRIVILEGES ON *.* TO 'roboticsuser'@'%' WITH GRANT OPTION;
-    FLUSH PRIVILEGES;
-    exit
+    docker ps
 
+From here, find the ID of the container named "pacman" and paste it into here
 
-IN THE PACMAN DOCKER CONTAINER
-run the following commands : 
+    docker logs <container-id> -f
 
-    sudo apt install update
-    sudo apt install python3.9-dev default-libmysqlclient-dev build-essential nmap
-    python3.9 -m pip install django mysqlclient
-    cd /workspaces/Pac-Man/pacman
-    python3.9 ./manage.py makemigrations inventory
-    python3.9 ./manage.py makemigrations 
-    python3.9 ./manage.py migrate
-    python3.9 ./manage.py createsuperuser # go through creating a master user
-    python3.9 ./manage.py migrate #for good luck
-    python3.9 ./manage.py runserver
+Pacman waits until a connection to mysql can be made, once that is complete, it will begin migrating and spin up the server, Error code 0 will be displayed with the server is ready to start
+Once the terminal reads : "Watching for file changes with StatReloader", the server is up, and can be connected to as [localhost:8000]
 
+### Post-Install
 
-#### Common Errors :
-
-if you run into the error 'roboticsuser'@'172.17.0.4' access denied, do the following
-
-log into mysql from the docker container
-run the following commands:
-
-    use mysql
-    select * from user # if a user is named "'roboticsuser'@'172.17.0.4'" , then run the following
-    drop user 'roboticsuser'@'172.17.0.4'
-
+Every time the pacman container is started, the admin account is created, this is to make sure that there is always a way in, when running in production make sure to create a new account for login, then remove the admin account
