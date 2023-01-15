@@ -29,13 +29,14 @@ SECRET_KEY = 'replace-me'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-#ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["127.0.0.1","localhost","your_domain_here"]
 
 
 # Application definition
 
 
 INSTALLED_APPS = [
+    'corsheaders'
     'inventory.apps.InventoryConfig',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -46,6 +47,8 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
+    "corsheaders.middleware.CorsMiddleware",
+    "django.middleware.common.CommonMiddleware",
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -61,7 +64,7 @@ TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [
-            os.path.join(BASE_DIR , 'staticfiles/html')
+            os.path.join(BASE_DIR, 'staticfiles/html')
         ],
         'APP_DIRS': True,
         'OPTIONS': {
@@ -90,6 +93,8 @@ DATABASES = {
     }
 }
 
+CORS_ALLOW_ALL_ORIGINS = True
+CSRF_TRUSTED_ORIGINS = ALLOWED_HOSTS
 
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators

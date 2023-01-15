@@ -16,6 +16,8 @@ reqs
     docker-desktop
     vs-code-docker-extention
 
+
+
 ### Step by Step
 
 if you want a different password for the database, change it in the etc/mysql dir

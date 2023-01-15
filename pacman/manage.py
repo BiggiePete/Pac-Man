@@ -2,11 +2,9 @@
 """Django's command-line utility for administrative tasks."""
 import os
 import sys
-import update_db_ip
 
 def main():
     # update IP address
-    update_db_ip.main()
     """Run administrative tasks."""
     os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'pacman.settings')
     try:
