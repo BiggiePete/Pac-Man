@@ -25,6 +25,7 @@ since the project now uses docker to handle the DBs, here is what needs to be do
 install docker desktop,
 pull the mysql container from docker's source
 run the mysql container, with the following options : 
+
     name = mysqldb
     port 3306::3306
         33060::unbound
@@ -36,6 +37,7 @@ once both docker containers have stabilized, and are running (5-10min)
 IN THE MYSQL DOCKER CONTAINER
 
 run the following commands : 
+
     mysql -u root -p #use the password created earlier
     #once in mysql run the following
     CREATE USER 'roboticsuser'@'%' IDENTIFIED BY 'pwd';
@@ -47,6 +49,7 @@ run the following commands :
 
 IN THE PACMAN DOCKER CONTAINER
 run the following commands : 
+
     sudo apt install update
     sudo apt install python3.9-dev default-libmysqlclient-dev build-essential nmap
     python3.9 -m pip install django mysqlclient
@@ -64,7 +67,8 @@ run the following commands :
 if you run into the error 'roboticsuser'@'172.17.0.4' access denied, do the following
 
 log into mysql from the docker container
-run the following commands
+run the following commands:
+
     use mysql
     select * from user # if a user is named "'roboticsuser'@'172.17.0.4'" , then run the following
     drop user 'roboticsuser'@'172.17.0.4'
