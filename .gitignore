@@ -17,7 +17,7 @@ media
 
 
 
-/static
+static
 # If you are using PyCharm # 
 .idea/**/workspace.xml 
 .idea/**/tasks.xml 
