@@ -1,12 +1,13 @@
 version: "3"
 
 volumes:
-  pacman-data:
   pacman-mysql:
 
 
 services:
   mysql:
+    restart: always
+    network_mode: "host"
     image: mysql:8.0
     volumes:
       - pacman-mysql:/var/lib/mysql
@@ -15,24 +16,12 @@ services:
       MYSQL_DATABASE: robotics_inv
     ports:
       - 3306:3306
-    networks:
-      default:
-        ipv4_address: 172.20.0.10
 
   pacman:
+    restart: always
+    network_mode: "host"
     build: .
     ports:
       - "8000:8000"
-    volumes:
-      - pacman-data:/pac
-    networks:
-      default:
-        ipv4_address: 172.20.0.11
-
-networks:
-  default:
-    driver: bridge
-    ipam:
-      config:
-        - subnet: 172.20.0.0/16
-          gateway: 172.20.0.1
+    depends_on:
+      - mysql

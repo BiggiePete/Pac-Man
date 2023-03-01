@@ -12,4 +12,4 @@ WORKDIR /pac/pacman
 RUN python3.9 -m pip install django mysqlclient django-cors-headers
 RUN chmod +x ./startup.sh
 RUN chmod +x ./wait.sh
-CMD [ "sh","startup.sh" ]
+ENTRYPOINT [ "sh","startup.sh" ]

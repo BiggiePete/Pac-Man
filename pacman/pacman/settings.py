@@ -29,10 +29,11 @@ SECRET_KEY = 'replace-me'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["localhost","127.0.0.1"]
+ALLOWED_HOSTS = ["localhost","127.0.0.1","192.168.137.162"]
 CSRF_TRUSTED_ORIGINS = [
     "http://localhost",
     "http://127.0.0.1",
+    "http://192.168.137.162"
 ]
 
 # Application definition
