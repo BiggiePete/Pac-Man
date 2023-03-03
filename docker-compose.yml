@@ -16,7 +16,7 @@ services:
       MYSQL_DATABASE: robotics_inv
       MYSQL_TCP_PORT: 5200
     ports:
-      - 3306:3306
+      - 5200:5200
 
   pacman:
     restart: always
