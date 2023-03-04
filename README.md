@@ -21,8 +21,11 @@ start by :
 
     cd /Pac-Man/
 
-From here, all you need to do is :
+Make sure to edit the settings.py file, to include your domain, and any ip addresses in the middle
 
+
+From here, all you need to do is :
+    docker network create --attachable --subnet 172.240.0.0/16 --gateway 172.240.0.1 deezNuts
     docker compose up -d
 
 If you cannot connect to localhost:8000 right away, dont worry about it, the docker database may take >5min to bring up, especially on a hard-drive. If you want to watch the startup live, run :
