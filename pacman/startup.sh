@@ -1,6 +1,6 @@
 #!/bin/bash
 
-/bin/bash ./wait.sh -h localhost -p 5200 -t 2400 &
+/bin/bash ./wait.sh -h sql -p 5200 -t 2400 &
 process_id=$!
 echo "PID: $process_id"
 wait $process_id

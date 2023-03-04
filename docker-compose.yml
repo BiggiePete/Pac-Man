@@ -3,11 +3,15 @@ version: "3"
 volumes:
   pacman-mysql:
 
+networks:
+  deezNuts:
+    name: deezNuts
+    external: true
+
 
 services:
   mysql:
     restart: always
-    network_mode: "host"
     image: mysql:8.0
     volumes:
       - pacman-mysql:/var/lib/mysql
@@ -17,12 +21,17 @@ services:
       MYSQL_TCP_PORT: 5200
     ports:
       - 5200:5200
+    networks:
+      - deezNuts
 
   pacman:
     restart: always
-    network_mode: "host"
     build: .
     ports:
       - "8000:8000"
     depends_on:
       - mysql
+    networks:
+      - deezNuts
+    links:
+      - mysql:sql
