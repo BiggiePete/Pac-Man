@@ -21,9 +21,6 @@ start by :
 
     cd /Pac-Man/
 
-Make sure to edit the settings.py file, to include your domain, and any ip addresses in the middle
-
-
 From here, all you need to do is :
     docker network create --attachable --subnet 172.240.0.0/16 --gateway 172.240.0.1 deezNuts
     docker compose up -d
